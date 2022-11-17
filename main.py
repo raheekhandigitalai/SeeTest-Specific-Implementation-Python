@@ -1,8 +1,5 @@
-import logging
-import threading
-import appium_script_ios
-import appium_script_android
-import helpers
+from ios_tests import appium_script_ios
+from android_tests import appium_script_android
 
 
 def start_appium_script_ios():

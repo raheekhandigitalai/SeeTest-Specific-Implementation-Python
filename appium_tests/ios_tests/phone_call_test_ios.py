@@ -4,7 +4,6 @@ import configparser
 
 import helpers
 import locators
-from helpers import logger
 
 from appium import webdriver
 from selenium.webdriver import DesiredCapabilities
@@ -24,7 +23,7 @@ class CheckDeviceWiFiStateiOS(unittest.TestCase):
 
     def setUp(self):
         # Capabilities for the session
-        capabilities['testName'] = 'iOS_Test_Python'
+        capabilities['testName'] = 'Phone_Call_Test'
         capabilities['accessKey'] = '%s' % helpers.get_access_key()
         capabilities['udid'] = '00008020-0005656621A2002E'
         capabilities['platformName'] = 'iOS'
@@ -37,32 +36,30 @@ class CheckDeviceWiFiStateiOS(unittest.TestCase):
 
     def test_wifi_connection(self):
 
-        WebDriverWait(self.driver, 5).until(
-            EC.element_to_be_clickable((By.XPATH, "//XCUIElementTypeButton[@id='Keypad']")))
-        self.driver.find_element(By.XPATH, "//XCUIElementTypeButton[@id='Keypad']").click()
+        helpers.wait_for_element_to_be_clickable(self.driver, locators.ios_keypad_button)
+        helpers.click_on_element(self.driver, locators.ios_keypad_button)
 
         phone_number = [3, 4, 7, 9, 3, 5, 6, 0, 0, 0]
 
         for number in phone_number:
-            self.driver.find_element(By.XPATH, "//XCUIElementTypeButton[@id='" + str(number) + "']").click()
+            helpers.click_on_element(self.driver, "//XCUIElementTypeButton[@id='" + str(number) + "']")
             time.sleep(0.5)
 
-        self.driver.find_element(By.XPATH, "//XCUIElementTypeButton[@text='Call']").click()
+        helpers.click_on_element(self.driver, locators.ios_call_button)
 
-        WebDriverWait(self.driver, 5).until(
-            EC.element_to_be_clickable((By.XPATH, "//XCUIElementTypeStaticText[contains(text(), 'calling')]")))
+        helpers.wait_for_element_to_be_clickable(self.driver, locators.ios_calling_text)
 
         time.sleep(5)
 
-        value = self.driver.find_element(By.XPATH, "(//XCUIElementTypeOther[@id='PHSingleCallParticipantLabelView']//*)[3]").text
+        value = helpers.get_text_from_element(self.driver, locators.ios_call_status_text)
         print(value)
 
         if value == "Call Failed":
-            self.driver.execute_script("seetest:client.report(\"The Call Failed\", \"false\")")
-            self.driver.execute_script("seetest:client.addTestProperty(\"call_status\",\"failed\")")
+            helpers.seetest_logger(self.driver, "The Call Failed", "false")
+            helpers.add_filter_tag_to_reporter(self.driver, "call_status", "failed")
         else:
-            self.driver.execute_script("seetest:client.report(\"The Call Is Successful\", \"true\")")
-            self.driver.execute_script("seetest:client.addTestProperty(\"call_status\",\"passed\")")
+            helpers.seetest_logger(self.driver, "The Call Is Successful", "true")
+            helpers.add_filter_tag_to_reporter(self.driver, "call_status", "passed")
 
     def tearDown(self):
         # Ending the device reservation session

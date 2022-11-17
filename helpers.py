@@ -53,6 +53,14 @@ def click_element_else_swipe_and_click(driver, xpath, start_offset):
                               ", 1000, \"NATIVE\", \"xpath=" + xpath + "\", 0, 1500, 2, true)")
 
 
+def seetest_logger(driver, message, status):
+    driver.execute_script("seetest:client.report(\"" + message + "\", \"" + status + "\")")
+
+
+def add_filter_tag_to_reporter(driver, property, status):
+    driver.execute_script("seetest:client.addTestProperty(\"" + property + "\",\"" + status + "\")")
+
+
 def get_access_key():
     return config.get('seetest_authorization', 'access_key')
 

@@ -2,14 +2,10 @@ import unittest
 import configparser
 
 import helpers
-import locators
-from helpers import logger
 
 from appium import webdriver
 from selenium.webdriver import DesiredCapabilities
 from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 
 # config.properties reader
 config = configparser.ConfigParser()
