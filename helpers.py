@@ -23,7 +23,7 @@ def wait_for_element_to_be_clickable(driver, xpath):
 
 # Re-usable method for waiting on element to be present and then click
 def wait_for_element_to_be_clickable_and_click(driver, xpath):
-    driver.wait_for_element_to_be_clickable(driver, xpath)
+    wait_for_element_to_be_clickable(driver, xpath)
     driver.find_element(By.XPATH, xpath).click()
 
 
@@ -43,6 +43,10 @@ def click_on_element(driver, xpath):
     driver.find_element(By.XPATH, xpath).click()
 
 
+def text_input_on_element(driver, xpath, text_input):
+    driver.find_element(By.XPATH, xpath).send_keys(text_input)
+
+
 # Re-usable method to click on element if found, else swipe and click
 def click_element_else_swipe_and_click(driver, xpath, start_offset):
     try:
@@ -51,6 +55,10 @@ def click_element_else_swipe_and_click(driver, xpath, start_offset):
     except:
         driver.execute_script("seetest:client.swipeWhileNotFound(\"DOWN\"," + str(start_offset) +
                               ", 1000, \"NATIVE\", \"xpath=" + xpath + "\", 0, 1500, 2, true)")
+
+
+def is_displayed(driver, xpath):
+    return driver.find_element(By.XPATH, xpath).is_displayed()
 
 
 def seetest_logger(driver, message, status):

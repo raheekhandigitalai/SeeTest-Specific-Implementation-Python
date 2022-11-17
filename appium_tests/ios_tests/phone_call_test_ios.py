@@ -7,19 +7,16 @@ import locators
 
 from appium import webdriver
 from selenium.webdriver import DesiredCapabilities
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 
 # config.properties reader
 config = configparser.ConfigParser()
 config.read('config.properties')
 
-# Pre-defining the Android Capabilities as this Class is designed for iOS only
+# Pre-defining the iOS Capabilities as this Class is designed for iOS only
 capabilities = DesiredCapabilities.IPHONE
 
 
-class CheckDeviceWiFiStateiOS(unittest.TestCase):
+class MakeAPhoneCall(unittest.TestCase):
 
     def setUp(self):
         # Capabilities for the session
@@ -68,5 +65,5 @@ class CheckDeviceWiFiStateiOS(unittest.TestCase):
 
 # Helps run the test using unittest framework
 runner = unittest.TextTestRunner()
-suite = unittest.TestLoader().loadTestsFromTestCase(CheckDeviceWiFiStateiOS)
+suite = unittest.TestLoader().loadTestsFromTestCase(MakeAPhoneCall)
 # runner.run(suite)
