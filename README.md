@@ -14,7 +14,7 @@ Above steps creates a local virtual environment where Python3, Pip3 and all rele
 To run tests, use the following command:
 
 ```commandline
- ./env/bin/python3 -m unittest appium_script_ios.py
+ ./env/bin/python3 -m unittest appium_tests/ios_tests/appium_script_ios.py
 ```
 
 Changing the **.py** file reference would run relevant test case.

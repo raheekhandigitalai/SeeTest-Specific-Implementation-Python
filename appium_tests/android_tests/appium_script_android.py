@@ -7,6 +7,10 @@ from helpers import logger
 from appium import webdriver
 from selenium.webdriver import DesiredCapabilities
 
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
 # config.properties reader
 config = configparser.ConfigParser()
 config.read('config.properties')
@@ -21,17 +25,16 @@ class CheckDeviceWiFiStateAndroid(unittest.TestCase):
         # Capabilities for the session
         capabilities['testName'] = 'Android_Test_Python'
         capabilities['accessKey'] = '%s' % helpers.get_access_key()
-        capabilities['udid'] = ''
+        capabilities['udid'] = 'R5CT3192GVE'
         capabilities['platformName'] = 'Android'
-        capabilities['generateReport'] = False  # Disable report creation, will help to reduce execution time
+        capabilities['appPackage'] = 'com.experitest.ExperiBank'
+        capabilities['appActivity'] = '.LoginActivity'
 
         self.driver = webdriver.Remote(desired_capabilities=capabilities,
                                        command_executor=helpers.get_cloud_url())
 
     def test_wifi_connection(self):
-        # Storing device Serial Number to variable
-        device_udid = self.driver.capabilities['udid']
-        logger(device_udid)
+        print('hello world')
 
     def tearDown(self):
         # Ending the device reservation session
