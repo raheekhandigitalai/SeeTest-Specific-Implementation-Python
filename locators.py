@@ -9,4 +9,5 @@ ios_call_status_text = "(//XCUIElementTypeOther[@id='PHSingleCallParticipantLabe
 
 # Android Locators
 
-android_connections_xpath = "xpath"
+android_call_state_text = "//*[@id='call_state_label']" # @text='Calling…'
+android_disconnect_button = "//*[@id='disconnect_button']"
