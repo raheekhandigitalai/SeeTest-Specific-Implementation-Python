@@ -9,7 +9,6 @@ from selenium.webdriver import DesiredCapabilities
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 
 # config.properties reader
 config = configparser.ConfigParser()
@@ -19,7 +18,7 @@ config.read('config.properties')
 capabilities = DesiredCapabilities.ANDROID
 
 
-class CheckDeviceWiFiStateAndroid(unittest.TestCase):
+class PhoneCallScenarios(unittest.TestCase):
 
     def setUp(self):
         # Capabilities for the session
@@ -33,7 +32,10 @@ class CheckDeviceWiFiStateAndroid(unittest.TestCase):
         self.driver = webdriver.Remote(desired_capabilities=capabilities,
                                        command_executor=helpers.get_cloud_url())
 
-    def phone_call_test(self):
+    def test_make_a_phone_call(self):
+        print('hello world')
+
+    def test_receive_a_phone_call(self):
         print('hello world')
 
     def tearDown(self):
@@ -43,4 +45,4 @@ class CheckDeviceWiFiStateAndroid(unittest.TestCase):
 
 # Helps run the test using unittest framework
 runner = unittest.TextTestRunner()
-suite = unittest.TestLoader().loadTestsFromTestCase(CheckDeviceWiFiStateAndroid)
+suite = unittest.TestLoader().loadTestsFromTestCase(PhoneCallScenarios)

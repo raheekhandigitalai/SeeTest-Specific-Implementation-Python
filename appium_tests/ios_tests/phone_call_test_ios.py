@@ -25,7 +25,8 @@ class MakeAPhoneCall(unittest.TestCase):
         capabilities['udid'] = '00008020-0005656621A2002E'
         capabilities['platformName'] = 'iOS'
         capabilities['autoDismissAlerts'] = True  # This helps to handle unexpected native pop-ups
-        capabilities['generateReport'] = True  # If setting to False, disables report creation, may help to reduce execution time
+        capabilities[
+            'generateReport'] = True  # If setting to False, disables report creation, may help to reduce execution time
         capabilities['bundleId'] = 'com.apple.mobilephone'
 
         self.driver = webdriver.Remote(desired_capabilities=capabilities,
@@ -51,10 +52,11 @@ class MakeAPhoneCall(unittest.TestCase):
         value = helpers.get_text_from_element(self.driver, locators.ios_call_status_text)
         print(value)
 
-        if value == "Call Failed":
-            helpers.seetest_logger(self.driver, "The Call Failed", "false")
-            helpers.add_filter_tag_to_reporter(self.driver, "call_status", "failed")
-        else:
+        try:
+            if value == "Call Failed":
+                helpers.seetest_logger(self.driver, "The Call Failed", "false")
+                helpers.add_filter_tag_to_reporter(self.driver, "call_status", "failed")
+        except:
             helpers.seetest_logger(self.driver, "The Call Is Successful", "true")
             helpers.add_filter_tag_to_reporter(self.driver, "call_status", "passed")
 
