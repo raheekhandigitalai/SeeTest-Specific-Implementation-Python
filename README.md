@@ -11,6 +11,13 @@ pip3 install -r requirements.txt
 
 Above steps creates a local virtual environment where Python3, Pip3 and all relevant dependencies reside.
 
+## Setting up the Tests
+
+Let's review the changes needed to make sure tests can get started successfully:
+
+1. Update **config.properties** with your Access Key. [Obtaining your Access Key](https://docs.experitest.com/display/TET/Obtaining+Access+Key)
+2. Update Capabilities - **TBD**
+
 ## Running Tests
 
 To run all tests from a single Class, use the following command (_replace the **.py** file reference to run relevant tests_):

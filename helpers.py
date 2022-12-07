@@ -90,3 +90,11 @@ def get_access_key():
 
 def get_cloud_url():
     return config.get('seetest_urls', 'cloud_url')
+
+
+def get_android_udid():
+    return config.get('device_information', 'android_udid')
+
+
+def get_ios_udid():
+    return config.get('device_information', 'ios_udid')

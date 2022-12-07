@@ -24,6 +24,7 @@ class SMSScenarios(unittest.TestCase):
         capabilities['accessKey'] = '%s' % helpers.get_access_key()
         capabilities['udid'] = '9887e8343439443447'
         capabilities['platformName'] = 'Android'
+        capabilities['generateReport'] = True  # If setting to False, disables report creation, may help to reduce execution time
         capabilities['appPackage'] = 'com.samsung.android.messaging'
         capabilities['appActivity'] = '.ui.view.main.WithActivity'
 
@@ -31,9 +32,6 @@ class SMSScenarios(unittest.TestCase):
                                        command_executor=helpers.get_cloud_url())
 
     def test_send_a_message(self):
-
-        time.sleep(5)
-
         text_to_send = 'hello'
 
         helpers.wait_for_element_to_be_clickable_and_click(self.driver, locators.android_compose_new_message_button)

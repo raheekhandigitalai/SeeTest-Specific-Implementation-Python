@@ -27,6 +27,7 @@ class BoilerTemplateAndroid(unittest.TestCase):
         capabilities['accessKey'] = '%s' % helpers.get_access_key()
         capabilities['udid'] = ''
         capabilities['platformName'] = 'Android'
+        capabilities['generateReport'] = True  # If setting to False, disables report creation, may help to reduce execution time
         capabilities['appPackage'] = 'com.experitest.ExperiBank'
         capabilities['appActivity'] = '.LoginActivity'
 

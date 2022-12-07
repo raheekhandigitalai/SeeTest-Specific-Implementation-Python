@@ -24,6 +24,7 @@ class PhoneCallScenarios(unittest.TestCase):
         capabilities['accessKey'] = '%s' % helpers.get_access_key()
         capabilities['udid'] = '9887e8343439443447'
         capabilities['platformName'] = 'Android'
+        capabilities['generateReport'] = True  # If setting to False, disables report creation, may help to reduce execution time
         capabilities['appPackage'] = 'com.samsung.android.dialer'
         capabilities['appActivity'] = '.DialtactsActivity'
 
@@ -39,8 +40,8 @@ class PhoneCallScenarios(unittest.TestCase):
 
         helpers.click_on_element(self.driver, locators.android_call_button)
 
-        helpers.device_action(self.driver, "Home")
-        helpers.launch_app(self.driver, "com.samsung.android.dialer/.DialtactsActivity")
+        # helpers.device_action(self.driver, "Home")
+        # helpers.launch_app(self.driver, "com.samsung.android.dialer/.DialtactsActivity")
 
         helpers.wait_for_element_to_be_clickable(self.driver, locators.android_call_state_text)
 
@@ -50,6 +51,7 @@ class PhoneCallScenarios(unittest.TestCase):
         try:
             if value == "Calling…":
                 helpers.seetest_logger(self.driver, "Attempting to make a call with status 'Calling…'", "true")
+                helpers.click_on_element(self.driver, locators.android_disconnect_button)
         except:
             helpers.seetest_logger(self.driver, value, "true")
 

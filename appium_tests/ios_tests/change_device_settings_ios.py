@@ -15,7 +15,7 @@ config.read('config.properties')
 capabilities = DesiredCapabilities.IPHONE
 
 
-class CheckDeviceWiFiStateiOS(unittest.TestCase):
+class DeviceSettingsScenarios(unittest.TestCase):
 
     def setUp(self):
         # Capabilities for the session
@@ -30,7 +30,7 @@ class CheckDeviceWiFiStateiOS(unittest.TestCase):
         self.driver = webdriver.Remote(desired_capabilities=capabilities,
                                        command_executor=helpers.get_cloud_url())
 
-    def test_wifi_connection(self):
+    def test_change_volte_settings(self):
         self.driver.find_element(By.XPATH, "//*[@id='WIFI']").click()
 
     def tearDown(self):
@@ -40,4 +40,4 @@ class CheckDeviceWiFiStateiOS(unittest.TestCase):
 
 # Helps run the test using unittest framework
 runner = unittest.TextTestRunner()
-suite = unittest.TestLoader().loadTestsFromTestCase(CheckDeviceWiFiStateiOS)
+suite = unittest.TestLoader().loadTestsFromTestCase(DeviceSettingsScenarios)

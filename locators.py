@@ -1,11 +1,24 @@
-# XPATHs stored under this file for re-usability and clean code in WiFiScript.py
+# XPATHs stored under this file for re-usability and clean code
 
-# iOS Locators
+#############################################
 
+## iOS Locators
+
+# Phone Related Locators
 ios_keypad_button = "//XCUIElementTypeButton[@id='Keypad']"
 ios_call_button = "//XCUIElementTypeButton[@text='Call']"
 ios_calling_text = "//XCUIElementTypeStaticText[contains(text(), 'calling')]"
 ios_call_status_text = "(//XCUIElementTypeOther[@id='PHSingleCallParticipantLabelView']//*)[3]"
+ios_end_call_button = "//*[@id='End call']"
+ios_accept_call_button = "//XCUIElementTypeButton[@id='Accept' and @text='Answer call']"
+ios_decline_call_button = "//XCUIElementTypeButton[@id='Decline']"
+ios_incoming_call_notification = "//*[@id='Incoming call']"
+
+# Message Related Locators
+
+# Device Settings Related Locators
+
+#############################################
 
 ## Android Locators
 
@@ -24,7 +37,7 @@ android_last_sent_message_text = "(//*[@id='content_text_view'])[last()]"
 android_message_received_toast = "//*[@id='toast_text_layout']"
 android_new_message_text = "//*[@id='new_message_body']"
 
-# Settings Related Locators
+# Device Settings Related Locators
 android_connections_button = "//*[@id='title' and @text='Connections']"
 android_mobile_networks_button = "//*[@id='title' and @text='Mobile networks']"
 android_volte_calls_toggle = "//*[@id='title' and @text='VoLTE calls']//parent::*/following-sibling::*[@id='widget_frame']//*[@id='switch_widget']"

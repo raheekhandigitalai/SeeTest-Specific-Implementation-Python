@@ -24,13 +24,14 @@ class DeviceSettingsScenarios(unittest.TestCase):
         capabilities['accessKey'] = '%s' % helpers.get_access_key()
         capabilities['udid'] = '9887e8343439443447'
         capabilities['platformName'] = 'Android'
+        capabilities['generateReport'] = True  # If setting to False, disables report creation, may help to reduce execution time
         capabilities['appPackage'] = 'com.android.settings'
         capabilities['appActivity'] = '.Settings'
 
         self.driver = webdriver.Remote(desired_capabilities=capabilities,
                                        command_executor=helpers.get_cloud_url())
 
-    def change_volte_settings(self):
+    def test_change_volte_settings(self):
         helpers.wait_for_element_to_be_clickable(self.driver, locators.android_connections_button)
         helpers.click_on_element(self.driver, locators.android_connections_button)
 

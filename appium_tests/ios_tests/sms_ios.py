@@ -7,10 +7,7 @@ import locators
 
 from appium import webdriver
 from selenium.webdriver import DesiredCapabilities
-
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import NoSuchElementException
 
 # config.properties reader
 config = configparser.ConfigParser()
@@ -20,13 +17,13 @@ config.read('config.properties')
 capabilities = DesiredCapabilities.IPHONE
 
 
-class SendSMSTest(unittest.TestCase):
+class SMSScenarios(unittest.TestCase):
 
     def setUp(self):
         # Capabilities for the session
         capabilities['testName'] = self._testMethodName
         capabilities['accessKey'] = '%s' % helpers.get_access_key()
-        capabilities['udid'] = '00008020-0005656621A2002E'
+        capabilities['udid'] = '%s' % helpers.get_ios_udid()
         capabilities['platformName'] = 'iOS'
         capabilities['autoDismissAlerts'] = True  # This helps to handle unexpected native pop-ups
         capabilities['generateReport'] = True  # If setting to False, disables report creation, may help to reduce execution time
@@ -35,7 +32,8 @@ class SendSMSTest(unittest.TestCase):
         self.driver = webdriver.Remote(desired_capabilities=capabilities,
                                        command_executor=helpers.get_cloud_url())
 
-    def test_wifi_connection(self):
+    def test_send_a_message(self):
+        text_to_send = 'hello'
 
         try:
             if helpers.is_displayed(self.driver, "//*[@id='CKChat']"):
@@ -45,20 +43,29 @@ class SendSMSTest(unittest.TestCase):
 
         helpers.wait_for_element_to_be_clickable_and_click(self.driver, "//*[@id='composeButton']")
 
-        helpers.text_input_on_element(self.driver, "//XCUIElementTypeTextField[@id='To:']", "3479356000")
+        helpers.text_input_on_element(self.driver, "//XCUIElementTypeTextField[@id='To:']", "3479356442")
 
-        helpers.click_on_element(self.driver, "//XCUIElementTypeTextField[@id='messageBodyField']")
-        helpers.text_input_on_element(self.driver, "//XCUIElementTypeTextField[@id='messageBodyField']", "Hello World")
-        helpers.click_on_element(self.driver, "//XCUIElementTypeButton[@id='sendButton']")
+        helpers.wait_for_element_to_be_clickable_and_click(self.driver, "//XCUIElementTypeTextField[@id='messageBodyField']")
+        helpers.text_input_on_element(self.driver, "//XCUIElementTypeTextField[@id='messageBodyField']", "Hello")
 
-        time.sleep(5)
+        helpers.wait_for_element_to_be_clickable_and_click(self.driver, "//XCUIElementTypeButton[@id='sendButton']")
 
-        if helpers.is_displayed(self.driver, "(//XCUIElementTypeStaticText[contains(text(), 'Not Delivered')])[1]"):
-            helpers.seetest_logger(self.driver, "Message Delivery Failed", "false")
-            helpers.add_filter_tag_to_reporter(self.driver, "message_status", "failed")
-        else:
-            helpers.seetest_logger(self.driver, "Message Delivery Is Successful", "true")
-            helpers.add_filter_tag_to_reporter(self.driver, "message_status", "passed")
+        time.sleep(10)
+
+        value = helpers.get_text_from_element(self.driver, "(//*[@class='UIAView' and contains(@id, 'Your Text Message')])[last()]")
+        print(value.lower())
+        print(text_to_send)
+
+        try:
+            if text_to_send in value:
+                helpers.seetest_logger(self.driver, "Message Sent Successfully", "true")
+                helpers.add_filter_tag_to_reporter(self.driver, "message_status_send", "passed")
+        except NoSuchElementException:
+            helpers.seetest_logger(self.driver, "Message Not Sent", "false")
+            helpers.add_filter_tag_to_reporter(self.driver, "message_status_send", "failed")
+
+    def test_receive_a_message(self):
+        print('hello') # message_status_receive
 
     def tearDown(self):
         # Ending the device reservation session
@@ -67,5 +74,4 @@ class SendSMSTest(unittest.TestCase):
 
 # Helps run the test using unittest framework
 runner = unittest.TextTestRunner()
-suite = unittest.TestLoader().loadTestsFromTestCase(SendSMSTest)
-# runner.run(suite)
+suite = unittest.TestLoader().loadTestsFromTestCase(SMSScenarios)
