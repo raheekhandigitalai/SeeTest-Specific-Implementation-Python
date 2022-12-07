@@ -21,6 +21,12 @@ def wait_for_element_to_be_clickable(driver, xpath):
         EC.element_to_be_clickable((By.XPATH, xpath)))
 
 
+# Re-usable method for waiting on element to be present
+def wait_for_element_to_be_clickable_custom_wait(driver, xpath, time_to_wait):
+    WebDriverWait(driver, time_to_wait, poll_frequency=0.3).until(
+        EC.element_to_be_clickable((By.XPATH, xpath)))
+
+
 # Re-usable method for waiting on element to be present and then click
 def wait_for_element_to_be_clickable_and_click(driver, xpath):
     wait_for_element_to_be_clickable(driver, xpath)
@@ -59,6 +65,15 @@ def click_element_else_swipe_and_click(driver, xpath, start_offset):
 
 def is_displayed(driver, xpath):
     return driver.find_element(By.XPATH, xpath).is_displayed()
+
+
+# Home / Back / Recent Apps - https://docs.experitest.com/display/TE/DeviceAction
+def device_action(driver, action):
+    driver.execute_script("seetest:client.deviceAction(\"" + action + "\")")
+
+
+def launch_app(driver, app_name):
+    driver.execute_script("seetest:client.launch(\"" + app_name + "\", \"false\", \"false\")")
 
 
 def seetest_logger(driver, message, status):
