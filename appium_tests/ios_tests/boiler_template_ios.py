@@ -1,11 +1,10 @@
 import unittest
 import configparser
 
-import helpers
+from config import helpers
 
 from appium import webdriver
 from selenium.webdriver import DesiredCapabilities
-from selenium.webdriver.common.by import By
 
 # config.properties reader
 config = configparser.ConfigParser()
@@ -21,7 +20,7 @@ class BoilerTemplateiOS(unittest.TestCase):
         # Capabilities for the session
         capabilities['testName'] = self._testMethodName
         capabilities['accessKey'] = '%s' % helpers.get_access_key()
-        capabilities['udid'] = ''
+        capabilities['udid'] = '%s' % helpers.get_ios_udid()
         capabilities['platformName'] = 'iOS'
         capabilities['autoDismissAlerts'] = True  # This helps to handle unexpected native pop-ups
         capabilities['generateReport'] = False  # Disable report creation, will help to reduce execution time

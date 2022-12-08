@@ -1,7 +1,7 @@
 import unittest
 import configparser
 
-import helpers
+from config import helpers
 
 from appium import webdriver
 from selenium.webdriver import DesiredCapabilities
@@ -21,7 +21,7 @@ class DeviceSettingsScenarios(unittest.TestCase):
         # Capabilities for the session
         capabilities['testName'] = self._testMethodName
         capabilities['accessKey'] = '%s' % helpers.get_access_key()
-        capabilities['udid'] = '00008020-0005656621A2002E'
+        capabilities['udid'] = '%s' % helpers.get_ios_udid()
         capabilities['platformName'] = 'iOS'
         capabilities['autoDismissAlerts'] = True  # This helps to handle unexpected native pop-ups
         capabilities['generateReport'] = False  # Disable report creation, will help to reduce execution time

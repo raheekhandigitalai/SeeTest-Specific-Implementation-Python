@@ -2,8 +2,7 @@ import time
 import unittest
 import configparser
 
-import helpers
-import locators
+from config import locators, helpers
 
 from appium import webdriver
 from selenium.webdriver import DesiredCapabilities
@@ -36,36 +35,56 @@ class SMSScenarios(unittest.TestCase):
         text_to_send = 'hello'
 
         try:
-            if helpers.is_displayed(self.driver, "//*[@id='CKChat']"):
-                helpers.wait_for_element_to_be_clickable_and_click(self.driver, "(//*[@XCElementType='XCUIElementTypeButton'])[1]")
+            if helpers.is_displayed(self.driver, locators.ios_header_in_sms_conversation):
+                helpers.wait_for_element_to_be_clickable_and_click(self.driver, locators.ios_back_button)
         except:
-            print('On main SMS Page')
+            print('On main SMS Page. Continuing.')
 
-        helpers.wait_for_element_to_be_clickable_and_click(self.driver, "//*[@id='composeButton']")
+        helpers.wait_for_element_to_be_clickable_and_click(self.driver, locators.ios_compose_new_message_button)
 
-        helpers.text_input_on_element(self.driver, "//XCUIElementTypeTextField[@id='To:']", "3479356442")
+        helpers.text_input_on_element(self.driver, locators.ios_recipient_input, "3479356442")
 
-        helpers.wait_for_element_to_be_clickable_and_click(self.driver, "//XCUIElementTypeTextField[@id='messageBodyField']")
-        helpers.text_input_on_element(self.driver, "//XCUIElementTypeTextField[@id='messageBodyField']", "Hello")
+        helpers.wait_for_element_to_be_clickable_and_click(self.driver, locators.ios_message_input)
+        helpers.text_input_on_element(self.driver, locators.ios_message_input, "Hello")
 
-        helpers.wait_for_element_to_be_clickable_and_click(self.driver, "//XCUIElementTypeButton[@id='sendButton']")
+        helpers.wait_for_element_to_be_clickable_and_click(self.driver, locators.ios_send_message_button)
 
         time.sleep(10)
 
-        value = helpers.get_text_from_element(self.driver, "(//*[@class='UIAView' and contains(@id, 'Your Text Message')])[last()]")
+        value = helpers.get_text_from_element(self.driver, locators.ios_last_sent_message_text)
         print(value.lower())
         print(text_to_send)
 
         try:
-            if text_to_send in value:
+            if text_to_send in value.lower():
                 helpers.seetest_logger(self.driver, "Message Sent Successfully", "true")
                 helpers.add_filter_tag_to_reporter(self.driver, "message_status_send", "passed")
         except NoSuchElementException:
             helpers.seetest_logger(self.driver, "Message Not Sent", "false")
             helpers.add_filter_tag_to_reporter(self.driver, "message_status_send", "failed")
 
+    # NEED TO VERIFY
     def test_receive_a_message(self):
-        print('hello') # message_status_receive
+        text_to_receive = 'hello'
+
+        helpers.device_action(self.driver, "Home")
+
+        helpers.wait_for_element_to_be_clickable_custom_wait(self.driver, locators.ios_message_notification_popup, 30)
+        helpers.click_on_element(self.driver, locators.ios_message_notification_popup)
+
+        time.sleep(5)
+
+        value = helpers.get_text_from_element(self.driver, "(//*[@XCElementType='XCUIElementTypeOther' and contains(text(), '" + text_to_receive + "')])[last()]")
+        print(value.lower())
+        print(text_to_receive)
+
+        try:
+            if text_to_receive in value.lower():
+                helpers.seetest_logger(self.driver, "Message Received Successfully", "true")
+                helpers.add_filter_tag_to_reporter(self.driver, "message_status_receive", "passed")
+        except NoSuchElementException:
+            helpers.seetest_logger(self.driver, "Message Not Received", "false")
+            helpers.add_filter_tag_to_reporter(self.driver, "message_status_receive", "failed")
 
     def tearDown(self):
         # Ending the device reservation session

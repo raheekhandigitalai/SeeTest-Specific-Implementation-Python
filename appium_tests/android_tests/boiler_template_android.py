@@ -1,15 +1,10 @@
 import unittest
 import configparser
 
-import helpers
-from helpers import logger
+from config import helpers
 
 from appium import webdriver
 from selenium.webdriver import DesiredCapabilities
-
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 
 # config.properties reader
 config = configparser.ConfigParser()
@@ -25,7 +20,7 @@ class BoilerTemplateAndroid(unittest.TestCase):
         # Capabilities for the session
         capabilities['testName'] = self._testMethodName
         capabilities['accessKey'] = '%s' % helpers.get_access_key()
-        capabilities['udid'] = ''
+        capabilities['udid'] = '%s' % helpers.get_android_udid()
         capabilities['platformName'] = 'Android'
         capabilities['generateReport'] = True  # If setting to False, disables report creation, may help to reduce execution time
         capabilities['appPackage'] = 'com.experitest.ExperiBank'

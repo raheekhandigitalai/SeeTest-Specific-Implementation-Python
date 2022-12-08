@@ -2,8 +2,7 @@ import time
 import unittest
 import configparser
 
-import helpers
-import locators
+from config import locators, helpers
 
 from appium import webdriver
 from selenium.webdriver import DesiredCapabilities
@@ -22,7 +21,7 @@ class SMSScenarios(unittest.TestCase):
         # Capabilities for the session
         capabilities['testName'] = self._testMethodName
         capabilities['accessKey'] = '%s' % helpers.get_access_key()
-        capabilities['udid'] = '9887e8343439443447'
+        capabilities['udid'] = '%s' % helpers.get_android_udid()
         capabilities['platformName'] = 'Android'
         capabilities['generateReport'] = True  # If setting to False, disables report creation, may help to reduce execution time
         capabilities['appPackage'] = 'com.samsung.android.messaging'
@@ -54,7 +53,6 @@ class SMSScenarios(unittest.TestCase):
             helpers.add_filter_tag_to_reporter(self.driver, "message_status_send", "failed")
 
     def test_receive_a_message(self):
-
         text_to_receive = 'hello'
 
         helpers.wait_for_element_to_be_clickable_custom_wait(self.driver, locators.android_message_received_toast, 30)

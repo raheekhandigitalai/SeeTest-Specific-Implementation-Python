@@ -2,8 +2,7 @@ import time
 import unittest
 import configparser
 
-import helpers
-import locators
+from config import locators, helpers
 
 from appium import webdriver
 from selenium.webdriver import DesiredCapabilities

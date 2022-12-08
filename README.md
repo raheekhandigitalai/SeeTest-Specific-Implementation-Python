@@ -15,8 +15,13 @@ Above steps creates a local virtual environment where Python3, Pip3 and all rele
 
 Let's review the changes needed to make sure tests can get started successfully:
 
-1. Update **config.properties** with your Access Key. [Obtaining your Access Key](https://docs.experitest.com/display/TET/Obtaining+Access+Key)
-2. Update Capabilities - **TBD**
+Update **config.properties**:
+
+1. Access Key: [Obtaining your Access Key](https://docs.experitest.com/display/TET/Obtaining+Access+Key)
+2. Target Cloud URL where the tests will run
+3. Device UDIDs to specify which devices the tests should run on, an easy way to find device UDID:
+
+![img.png](images/devices_page_list_view.png)
 
 ## Running Tests
 

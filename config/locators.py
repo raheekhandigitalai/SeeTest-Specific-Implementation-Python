@@ -16,6 +16,15 @@ ios_incoming_call_notification = "//*[@id='Incoming call']"
 
 # Message Related Locators
 
+ios_header_in_sms_conversation = "//*[@id='CKChat']"
+ios_back_button = "(//*[@XCElementType='XCUIElementTypeButton'])[1]"
+ios_compose_new_message_button = "//*[@id='composeButton']"
+ios_recipient_input = "//XCUIElementTypeTextField[@id='To:']"
+ios_message_input = "//XCUIElementTypeTextField[@id='messageBodyField']"
+ios_send_message_button = "//XCUIElementTypeButton[@id='sendButton']"
+ios_last_sent_message_text = "(//*[@class='UIAView' and contains(@id, 'Your Text Message')])[last()]"
+ios_message_notification_popup = "//*[@accessibilityLabel='NotificationShortLookView']"
+
 # Device Settings Related Locators
 
 #############################################

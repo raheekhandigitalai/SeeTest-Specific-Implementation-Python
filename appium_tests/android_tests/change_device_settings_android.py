@@ -2,8 +2,7 @@ import time
 import unittest
 import configparser
 
-import helpers
-import locators
+from config import locators, helpers
 
 from appium import webdriver
 from selenium.webdriver import DesiredCapabilities
@@ -22,7 +21,7 @@ class DeviceSettingsScenarios(unittest.TestCase):
         # Capabilities for the session
         capabilities['testName'] = self._testMethodName
         capabilities['accessKey'] = '%s' % helpers.get_access_key()
-        capabilities['udid'] = '9887e8343439443447'
+        capabilities['udid'] = '%s' % helpers.get_android_udid()
         capabilities['platformName'] = 'Android'
         capabilities['generateReport'] = True  # If setting to False, disables report creation, may help to reduce execution time
         capabilities['appPackage'] = 'com.android.settings'
