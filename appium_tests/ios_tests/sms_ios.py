@@ -34,6 +34,7 @@ class SMSScenarios(unittest.TestCase):
     def test_send_a_message(self):
         text_to_send = 'hello'
 
+        # Try / Catch checks whether main sms page appears, if not then perform appropriate steps
         try:
             if helpers.is_displayed(self.driver, locators.ios_header_in_sms_conversation):
                 helpers.wait_for_element_to_be_clickable_and_click(self.driver, locators.ios_back_button)
@@ -45,15 +46,13 @@ class SMSScenarios(unittest.TestCase):
         helpers.text_input_on_element(self.driver, locators.ios_recipient_input, "3479356442")
 
         helpers.wait_for_element_to_be_clickable_and_click(self.driver, locators.ios_message_input)
-        helpers.text_input_on_element(self.driver, locators.ios_message_input, "Hello")
+        helpers.text_input_on_element(self.driver, locators.ios_message_input, text_to_send)
 
         helpers.wait_for_element_to_be_clickable_and_click(self.driver, locators.ios_send_message_button)
 
         time.sleep(10)
 
         value = helpers.get_text_from_element(self.driver, locators.ios_last_sent_message_text)
-        print(value.lower())
-        print(text_to_send)
 
         try:
             if text_to_send in value.lower():

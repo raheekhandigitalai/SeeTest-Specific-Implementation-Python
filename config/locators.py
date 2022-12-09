@@ -27,6 +27,13 @@ ios_message_notification_popup = "//*[@accessibilityLabel='NotificationShortLook
 
 # Device Settings Related Locators
 
+ios_cellular_button = "//XCUIElementTypeCell[@id='Cellular']"
+ios_cellular_plans_primary_button = "//*[@accessibilityLabel='CELLULAR PLANS']/following-sibling::*[1]"
+ios_voice_and_data_button = "//XCUIElementTypeCell[@id='Voice & Data']"
+ios_selected_voice_and_data_option = "//*[@id='checkmark']//parent::XCUIElementTypeCell"
+ios_4g_option = "//XCUIElementTypeCell[@id='4G']"
+ios_lte_option = "//XCUIElementTypeCell[@id='LTE']"
+
 #############################################
 
 ## Android Locators
