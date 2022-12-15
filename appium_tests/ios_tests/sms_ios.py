@@ -18,6 +18,8 @@ capabilities = DesiredCapabilities.IPHONE
 
 class SMSScenarios(unittest.TestCase):
 
+    # currentResult = None  # Holds last result object passed to run method
+
     def setUp(self):
         # Capabilities for the session
         capabilities['testName'] = self._testMethodName
@@ -62,7 +64,6 @@ class SMSScenarios(unittest.TestCase):
             helpers.seetest_logger(self.driver, "Message Not Sent", "false")
             helpers.add_filter_tag_to_reporter(self.driver, "message_status_send", "failed")
 
-    # NEED TO VERIFY
     def test_receive_a_message(self):
         text_to_receive = 'hello'
 
@@ -87,6 +88,7 @@ class SMSScenarios(unittest.TestCase):
 
     def tearDown(self):
         # Ending the device reservation session
+        helpers.handle_teardown(self, self.driver)
         self.driver.quit()
 
 

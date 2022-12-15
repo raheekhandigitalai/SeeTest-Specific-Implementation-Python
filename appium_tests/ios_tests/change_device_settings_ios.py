@@ -25,7 +25,7 @@ class DeviceSettingsScenarios(unittest.TestCase):
         capabilities['udid'] = '%s' % helpers.get_ios_udid()
         capabilities['platformName'] = 'iOS'
         capabilities['autoDismissAlerts'] = True  # This helps to handle unexpected native pop-ups
-        capabilities['generateReport'] = False  # Disable report creation, will help to reduce execution time
+        capabilities['generateReport'] = True  # Disable report creation, will help to reduce execution time
         capabilities['bundleId'] = 'com.apple.Preferences'
 
         self.driver = webdriver.Remote(desired_capabilities=capabilities,
@@ -34,6 +34,7 @@ class DeviceSettingsScenarios(unittest.TestCase):
     def test_change_volte_settings(self):
         helpers.wait_for_element_to_be_clickable_and_click(self.driver, locators.ios_cellular_button)
         helpers.wait_for_element_to_be_clickable_and_click(self.driver, locators.ios_cellular_plans_primary_button)
+        helpers.wait_for_element_to_be_clickable_and_click(self.driver, locators.ios_voice_and_data_button)
 
         value = helpers.get_text_from_element(self.driver, locators.ios_selected_voice_and_data_option)
         print(value)

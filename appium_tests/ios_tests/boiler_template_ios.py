@@ -5,6 +5,8 @@ from config import helpers
 
 from appium import webdriver
 from selenium.webdriver import DesiredCapabilities
+from selenium.webdriver.common.by import By
+from selenium.common.exceptions import NoSuchElementException
 
 # config.properties reader
 config = configparser.ConfigParser()
@@ -24,13 +26,16 @@ class BoilerTemplateiOS(unittest.TestCase):
         capabilities['platformName'] = 'iOS'
         capabilities['autoDismissAlerts'] = True  # This helps to handle unexpected native pop-ups
         capabilities['generateReport'] = False  # Disable report creation, will help to reduce execution time
+        capabilities['app'] = 'cloud:com.experitest.ExperiBank'  # To install Application from the Cloud
         capabilities['bundleId'] = 'com.experitest.ExperiBank'
 
         self.driver = webdriver.Remote(desired_capabilities=capabilities,
                                        command_executor=helpers.get_cloud_url())
 
-    def test_wifi_connection(self):
-        print('hello world')
+    def test_scenario_01(self):
+        self.driver.find_element(By.XPATH, "//*[@name='usernameTextField']").send_keys("company")
+        self.driver.find_element(By.XPATH, "//*[@name='passwordTextField']").send_keys("company")
+        self.driver.find_element(By.XPATH, "//*[@name='loginButton']").click()
 
     def tearDown(self):
         # Ending the device reservation session
