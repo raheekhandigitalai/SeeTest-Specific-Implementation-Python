@@ -69,7 +69,13 @@ def click_element_else_swipe_and_click(driver, xpath, start_offset):
                               ", 1000, \"NATIVE\", \"xpath=" + xpath + "\", 0, 1500, 2, true)")
 
 
-# method Name - client.deviceAction()
+# Method Name - client.run()
+# Function - Allows us to run ADB commands directly on Android Devices
+def run_adb(driver, adb_prompt):
+    return driver.execute_script("seetest:client.run(\"" + adb_prompt + "\")")
+
+
+# Method Name - client.deviceAction()
 # Function - Allows us to perform actions you can physically do on a Mobile Device.
 # Few examples: Home (Going to Home Page), Switch Orientation (Landscape / Portrait).
 # https://docs.experitest.com/display/TE/DeviceAction
@@ -153,3 +159,7 @@ def get_android_udid():
 
 def get_ios_udid():
     return config.get('device_information', 'ios_udid')
+
+
+def get_generate_report():
+    return config.get('reporting', 'generate_report')

@@ -30,7 +30,7 @@ class ParallelTestsiOS(unittest.TestCase):
         capabilities['accessKey'] = '%s' % helpers.get_access_key()
         capabilities['platformName'] = 'iOS'
         capabilities['deviceQuery'] = "@os='ios' and @category='PHONE' and contains(@name, 'XR')"
-        capabilities['generateReport'] = True  # Disable report creation, will help to reduce execution time
+        capabilities['generateReport'] = helpers.get_generate_report()
         capabilities['app'] = 'cloud:com.experitest.ExperiBank'
         capabilities['bundleId'] = 'com.experitest.ExperiBank'
 
