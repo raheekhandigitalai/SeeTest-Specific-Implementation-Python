@@ -23,7 +23,7 @@ class PhoneCallMultiDeviceiOS(unittest.TestCase):
         self.driver = webdriver.Remote(desired_capabilities=capabilities,
                                        command_executor=helpers.get_cloud_url())
 
-    def test_scenario_01(self):
+    def receive_phone_call(self):
         helpers.wait_for_element_to_be_clickable_custom_wait(self.driver, locators.ios_decline_call_button, 60)
 
         try:

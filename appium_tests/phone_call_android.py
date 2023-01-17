@@ -26,7 +26,7 @@ class PhoneCallMultiDeviceAndroid(unittest.TestCase):
         self.driver = webdriver.Remote(desired_capabilities=capabilities,
                                        command_executor=helpers.get_cloud_url())
 
-    def test_scenario_01(self):
+    def test_make_phone_call(self):
         phone_number_list = [n for n in self.phone_number]
 
         helpers.click_on_element(self.driver, locators.android_keypad_button)
