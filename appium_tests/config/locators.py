@@ -1,3 +1,8 @@
+import os
+import sys
+
+sys.path.append(os.path.dirname(__file__))
+
 # XPATHs stored under this file for re-usability and clean code
 
 #############################################
@@ -39,6 +44,7 @@ ios_lte_option = "//XCUIElementTypeCell[@id='LTE']"
 ## Android Locators
 
 # Phone Related Locators
+android_keypad_button = "//*[@id='tab_text_view' and @text='Keypad']"
 android_call_button = "//*[@id='dialButton']"
 android_call_state_text = "//*[@id='call_state_label']" # [@text='Calling…'] [@text='Call ended']
 android_disconnect_button = "//*[@id='disconnect_button']"

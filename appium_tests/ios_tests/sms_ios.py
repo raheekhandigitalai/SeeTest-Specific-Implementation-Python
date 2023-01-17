@@ -90,8 +90,3 @@ class SMSScenarios(unittest.TestCase):
         # Ending the device reservation session
         helpers.handle_teardown(self, self.driver)
         self.driver.quit()
-
-
-# Helps run the test using unittest framework
-runner = unittest.TextTestRunner()
-suite = unittest.TestLoader().loadTestsFromTestCase(SMSScenarios)

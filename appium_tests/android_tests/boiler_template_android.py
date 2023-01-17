@@ -6,7 +6,6 @@ from config import helpers
 from appium import webdriver
 from selenium.webdriver import DesiredCapabilities
 from selenium.webdriver.common.by import By
-from selenium.common.exceptions import NoSuchElementException
 
 # config.properties reader
 config = configparser.ConfigParser()
@@ -40,8 +39,3 @@ class BoilerTemplateAndroid(unittest.TestCase):
     def tearDown(self):
         # Ending the device reservation session
         self.driver.quit()
-
-
-# Helps run the test using unittest framework
-runner = unittest.TextTestRunner()
-suite = unittest.TestLoader().loadTestsFromTestCase(BoilerTemplateAndroid)

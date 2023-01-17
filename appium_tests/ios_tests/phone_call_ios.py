@@ -79,8 +79,3 @@ class PhoneCallScenarios(unittest.TestCase):
     def tearDown(self):
         # Ending the device reservation session
         self.driver.quit()
-
-
-# Helps run the test using unittest framework
-runner = unittest.TextTestRunner()
-suite = unittest.TestLoader().loadTestsFromTestCase(PhoneCallScenarios)
