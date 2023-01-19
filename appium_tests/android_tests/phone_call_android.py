@@ -7,6 +7,9 @@ from config import locators, helpers
 from appium import webdriver
 from selenium.webdriver import DesiredCapabilities
 
+from selenium.webdriver.common.by import By
+from appium.webdriver.common.touch_action import TouchAction
+
 # config.properties reader
 config = configparser.ConfigParser()
 config.read('config.properties')
@@ -53,9 +56,6 @@ class PhoneCallScenarios(unittest.TestCase):
                 helpers.click_on_element(self.driver, locators.android_disconnect_button)
         except:
             helpers.seetest_logger(self.driver, value, "true")
-
-    def test_receive_a_phone_call(self):
-        print('hello world')
 
     def tearDown(self):
         # Ending the device reservation session

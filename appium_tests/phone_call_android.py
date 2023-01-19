@@ -5,6 +5,9 @@ import configparser
 from config import helpers, locators
 from appium import webdriver
 
+from selenium.webdriver.common.by import By
+from appium.webdriver.common.touch_action import TouchAction
+
 config = configparser.ConfigParser()
 config.read('config.properties')
 
